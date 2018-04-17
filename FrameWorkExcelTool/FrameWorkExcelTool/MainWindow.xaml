@@ -1,0 +1,43 @@
+﻿<Window x:Class="FrameWorkExcelTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FrameWorkExcelTool"
+        mc:Ignorable="d"
+        Title="Excel表格导出工具" Height="393.634" Width="660.544">
+    <Grid x:Name="Grid_main" >
+        <TextBox x:Name="Text_ExcelPath" Height="23" Margin="78,10,90,0" TextWrapping="NoWrap" Text="{Binding Path=ExcelPath}" VerticalAlignment="Top"/>
+        <Label Content="Excel目录" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Text_ExportPath" Height="23" Margin="78,40,90,0" TextWrapping="NoWrap" Text="{Binding Path=ExportPath}" VerticalAlignment="Top"/>
+        <Label Content="导出目录" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <Button Content="浏览" Margin="0,13,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="Button_ClickExcelPath"/>
+        <Button Content="浏览" Margin="0,43,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="75" Click="Button_ClickExportPath"/>
+        <ListBox x:Name="List_ExcelList" Margin="10,70,10,36" ItemsSource="{Binding Path=CheckList, Mode=TwoWay}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <CheckBox Content="{Binding Path=FileName}" 
+                                  IsChecked="{Binding Path=IsCheck, Mode=TwoWay}" 
+                                  Checked="CheckBox_Checked"
+                                  Unchecked="CheckBox_Checked"
+                                  Tag="{Binding Path=FilePath}"/>
+                        
+                        <TextBox Text="{Binding Path=ExportName, Mode=TwoWay}" 
+                                 HorizontalAlignment="Right"
+                                 TextChanged="TextBox_TextChanged"
+                                 Tag="{Binding Path=FilePath}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+        <Button Content="导出" Margin="432,0,10,10" Click="Button_ClickExport" Height="19" VerticalAlignment="Bottom"/>
+
+    </Grid>
+</Window>
